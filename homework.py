@@ -5,7 +5,7 @@ import time
 import requests
 import telegram
 from dotenv import load_dotenv
-
+from requests import RequestException
 
 log = logging.getLogger(__name__)
 log.setLevel(level=logging.DEBUG)
@@ -39,20 +39,16 @@ sleep_sec = 5 * 60
 
 
 def parse_homework_status(homework):
-    homework_name = homework.get('homework_name', None)
+    homework_name = homework.get('homework_name')
     if homework_name is None:
-        homework_name = 'Пусто'
-    status = homework.get('status', None)
+        return None
+    status = homework.get('status')
     if status is None:
-        status = 'Пусто'
+        return None
     if status == 'rejected':
         verdict = 'К сожалению, в работе нашлись ошибки.'
     elif status == 'reviewing':
-        message = (
-            f'Lesson name: {homework_name}\n'
-            f'Status: {status}\n'
-        )
-        send_message(message)
+        verdict = 'Работа на проверке'
     else:
         verdict = 'Ревьюеру всё понравилось, работа зачтена!'
     return f'У вас проверили работу "{homework_name}"!\n\n{verdict}'
@@ -67,10 +63,10 @@ def get_homeworks(current_timestamp):
         homework_status = requests.get(
             url, headers=headers, params=payload
         )
-    except Exception as e:
+    except RequestException as e:
         message = f'API returned exception: {e}'
         log.error(message)
-        return e
+        raise e
     return homework_status.json()
 
 
