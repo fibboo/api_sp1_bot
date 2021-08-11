@@ -33,6 +33,7 @@ CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 bot = telegram.Bot(TELEGRAM_TOKEN)
 
 url = 'https://praktikum.yandex.ru/api/user_api/homework_statuses/'
+url_2 = 'https://praktiсum.yandex.ru/api/user_api/homework_statuses/'
 headers = {'Authorization': f'OAuth {PRAKTIKUM_TOKEN}'}
 
 sleep_sec = 5 * 60
@@ -63,10 +64,15 @@ def get_homeworks(current_timestamp):
         homework_status = requests.get(
             url, headers=headers, params=payload
         )
-    except RequestException as e:
-        message = f'API returned exception: {e}'
-        log.error(message)
-        raise e
+    except:
+        try:
+            homework_status = requests.get(
+                url_2, headers=headers, params=payload
+            )
+        except RequestException as e:
+            message = f'API returned exception: {e}'
+            log.error(message)
+            raise e
     return homework_status.json()
 
 
