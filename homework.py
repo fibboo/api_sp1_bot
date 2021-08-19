@@ -102,7 +102,7 @@ def main():
             message = f'Бот упал с ошибкой: {e}'
             log.error(message)
             send_message(message)
-            time.sleep(5)
+            time.sleep(5*60)
 
 
 if __name__ == '__main__':
