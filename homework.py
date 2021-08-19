@@ -36,7 +36,7 @@ url = 'https://praktikum.yandex.ru/api/user_api/homework_statuses/'
 url_2 = 'https://praktiсum.yandex.ru/api/user_api/homework_statuses/'
 headers = {'Authorization': f'OAuth {PRAKTIKUM_TOKEN}'}
 
-sleep_sec = 5 * 60
+sleep_sec = 10 * 60
 
 
 def parse_homework_status(homework):
@@ -102,7 +102,7 @@ def main():
             message = f'Бот упал с ошибкой: {e}'
             log.error(message)
             send_message(message)
-            time.sleep(5*60)
+            time.sleep(5)
 
 
 if __name__ == '__main__':
