@@ -32,7 +32,7 @@ CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
 bot = telegram.Bot(TELEGRAM_TOKEN)
 
-url = 'https://praktikum.yandex.ru/api/user_api/homework_statuses/'
+url = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
 url_2 = 'https://praktiсum.yandex.ru/api/user_api/homework_statuses/'
 headers = {'Authorization': f'OAuth {PRAKTIKUM_TOKEN}'}
 
