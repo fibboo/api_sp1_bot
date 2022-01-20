@@ -9,7 +9,7 @@ $ git clone https://github.com/fibboo/ya.prakticum_telegram_bot.git
 ```
 Install python environment, activate and install requirements
 ```shell
-$ cd ya.prakticum_telegram_bot
+$ cd ya.prakticum_telegram_bot/
 $ python3 -m venv venv
 $ . ./venv/bin/activate
 $ pip install -r requirments.txt
